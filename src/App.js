@@ -2,14 +2,11 @@ import React, { Component } from 'react'
 import { findDOMNode } from 'react-dom'
 import screenfull from 'screenfull'
 
-import './styles/reset.scss'
-import './styles/defaults.scss'
-import './styles/range.scss'
-import './styles/main.scss'
+import './theme/main.scss'
 
-import { version } from '../package.json'
 import ReactPlayer from 'react-player'
 import Duration from './components/Durantion'
+import Controls from './components/Controls'
 
 const MULTIPLE_SOURCES = [
     { src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4', type: 'video/mp4' },
@@ -23,12 +20,13 @@ class App extends Component {
         pip: false,
         playing: true,
         volume: 0.8,
-        muted: false,
+        muted: true,
         played: 0,
         loaded: 0,
         duration: 0,
         playbackRate: 1.0,
-        loop: false
+        loop: false,
+        remaining: false
     }
     load = url => {
         this.setState({
@@ -55,6 +53,9 @@ class App extends Component {
     }
     toggleMuted = () => {
         this.setState({ muted: !this.state.muted })
+    }
+    toggleRemaining= () => {
+        this.setState({ remaining: !this.state.remaining })
     }
     setPlaybackRate = e => {
         this.setState({ playbackRate: parseFloat(e.target.value) })
@@ -114,13 +115,12 @@ class App extends Component {
         this.player = player
     }
     render () {
-        const { url, playing, volume, muted, loop, played, loaded, duration, playbackRate, pip } = this.state
+        const { url, playing, volume, muted, loop, played, loaded, duration, playbackRate, pip, remaining } = this.state
         const SEPARATOR = ' · '
 
         return (
             <div className='app'>
                 <section className='section'>
-                    <h1>ReactPlayer Demo</h1>
                     <div className='player-wrapper'>
                         <ReactPlayer
                             ref={this.ref}
@@ -192,6 +192,7 @@ class App extends Component {
                             <label htmlFor='muted'>Muted</label>
                         </th>
                         <td>
+                            <button onClick={this.toggleMuted}  >mute</button>
                             <input id='muted' type='checkbox' checked={muted} onChange={this.toggleMuted} />
                         </td>
                     </tr>
@@ -222,20 +223,7 @@ class App extends Component {
                             {this.renderLoadButton('https://www.youtube.com/watch?v=jNgP6d9HraI', 'Test B')}
                         </td>
                     </tr>
-                    <tr>
-                        <th>SoundCloud</th>
-                        <td>
-                            {this.renderLoadButton('https://soundcloud.com/miami-nights-1984/accelerated', 'Test A')}
-                            {this.renderLoadButton('https://soundcloud.com/tycho/tycho-awake', 'Test B')}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Facebook</th>
-                        <td>
-                            {this.renderLoadButton('https://www.facebook.com/facebook/videos/10153231379946729/', 'Test A')}
-                            {this.renderLoadButton('https://www.facebook.com/FacebookDevelopers/videos/10152454700553553/', 'Test B')}
-                        </td>
-                    </tr>
+
                     <tr>
                         <th>Vimeo</th>
                         <td>
@@ -243,42 +231,7 @@ class App extends Component {
                             {this.renderLoadButton('https://vimeo.com/169599296', 'Test B')}
                         </td>
                     </tr>
-                    <tr>
-                        <th>Twitch</th>
-                        <td>
-                            {this.renderLoadButton('https://www.twitch.tv/videos/106400740', 'Test A')}
-                            {this.renderLoadButton('https://www.twitch.tv/videos/12783852', 'Test B')}
-                            {this.renderLoadButton('https://www.twitch.tv/kronovi', 'Test C')}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Streamable</th>
-                        <td>
-                            {this.renderLoadButton('https://streamable.com/moo', 'Test A')}
-                            {this.renderLoadButton('https://streamable.com/ifjh', 'Test B')}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Wistia</th>
-                        <td>
-                            {this.renderLoadButton('https://home.wistia.com/medias/e4a27b971d', 'Test A')}
-                            {this.renderLoadButton('https://home.wistia.com/medias/29b0fbf547', 'Test B')}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>DailyMotion</th>
-                        <td>
-                            {this.renderLoadButton('https://www.dailymotion.com/video/x5e9eog', 'Test A')}
-                            {this.renderLoadButton('https://www.dailymotion.com/video/x61xx3z', 'Test B')}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Mixcloud</th>
-                        <td>
-                            {this.renderLoadButton('https://www.mixcloud.com/mixcloud/meet-the-curators/', 'Test A')}
-                            {this.renderLoadButton('https://www.mixcloud.com/mixcloud/mixcloud-curates-4-mary-anne-hobbs-in-conversation-with-dan-deacon/', 'Test B')}
-                        </td>
-                    </tr>
+
                     <tr>
                         <th>Files</th>
                         <td>
@@ -339,13 +292,21 @@ class App extends Component {
                     </tr>
                     </tbody></table>
                 </section>
-                <footer className='footer'>
-                    Version <strong>{version}</strong>
-                    {SEPARATOR}
-                    <a href='https://github.com/CookPete/react-player'>GitHub</a>
-                    {SEPARATOR}
-                    <a href='https://www.npmjs.com/package/react-player'>npm</a>
-                </footer>
+                <Controls
+                    duration={duration}
+                    played={played}
+                    volume={volume}
+                    muted={muted}
+                    playing={playing}
+                    remaining={remaining}
+                    playPause={this.playPause}
+                    toggleRemaining={this.toggleRemaining}
+                    toggleMuted={this.toggleMuted}
+                    onMouseDown={this.onSeekMouseDown}
+                    onChange={this.onSeekChange}
+                    onMouseUp={this.onSeekMouseUp}
+                >
+                </Controls>
             </div>
         )
     }
