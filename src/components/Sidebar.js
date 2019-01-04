@@ -10,10 +10,13 @@ const albumImage = songDetails => {
     }
 }
 
-const Sidebar = ({location, songDetails}) => (
+const Sidebar = ({location, songDetails, children}) => (
     <Nav bsStyle="pills" stacked bsClass={'navBar'}>
+
         <div>
+            {children}
             <p className="NavBar__title">Your library </p>
+
             <NavItem componentClass={Link} href="/RecentSongs" to="/RecentSongs">
                 Recently played
             </NavItem>
@@ -24,6 +27,7 @@ const Sidebar = ({location, songDetails}) => (
                 Songs
             </NavItem>
             <p className="NavBar__title">Playlists</p>
+
             {/*<NavItem componentClass={Link} href="/AboutPage" to="/login">*/}
             {/*Classics*/}
             {/*</NavItem>*/}
@@ -35,6 +39,7 @@ const Sidebar = ({location, songDetails}) => (
             {/*</NavItem>*/}
         </div>
         {albumImage(songDetails)}
+
     </Nav>
 )
 

@@ -14,6 +14,9 @@ import Controls from './components/Controls'
 import Sidebar from './components/Sidebar'
 import Header from './components/Header'
 import HomePage from './containers/HomePage'
+import PlayerWrapper from './components/PlayerWrapper'
+
+// json-server --watch db.json --port 4200
 
 const MULTIPLE_SOURCES = [
     {src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4', type: 'video/mp4'},
@@ -161,9 +164,39 @@ class App extends Component {
         return (
             <Router>
                 <Grid fluid style={{padding: 0}}>
-                    <Row className="show-grid" style={{height: '87vh'}}>
+                    <Row className="show-grid" style={{height: '100vh'}}>
                         <Col xs={2} md={2} style={{height: '100%', padding: 0}}>
-                            <Sidebar songDetails={this.props.songDetails}/>
+                            <Sidebar>
+                                <PlayerWrapper>
+                                    <ReactPlayer
+                                        ref={this.ref}
+                                        className='react-player'
+                                        width='100%'
+                                        height='100%'
+                                        url={url}
+                                        pip={pip}
+                                        playing={playing}
+                                        loop={loop}
+                                        playbackRate={playbackRate}
+                                        volume={volume}
+                                        muted={muted}
+                                        onReady={() => console.log('onReady')}
+                                        onStart={() => console.log('onStart')}
+                                        onPlay={this.onPlay}
+                                        onEnablePIP={this.onEnablePIP}
+                                        onDisablePIP={this.onDisablePIP}
+                                        onPause={this.onPause}
+                                        onBuffer={() => console.log('onBuffer')}
+                                        onSeek={e => console.log('onSeek', e)}
+                                        onEnded={this.onEnded}
+                                        onError={e => console.log('onError', e)}
+                                        onProgress={this.onProgress}
+                                        onDuration={this.onDuration}
+                                    />
+                                    {this.renderLoadButton('http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4', 'mp4')}
+
+                                </PlayerWrapper>
+                            </Sidebar>
                         </Col>
                         <Col xs={10} md={10} className="content">
                             <Header user={user}/>

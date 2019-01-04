@@ -1,5 +1,6 @@
 @import "controls";
 @import "spotify";
+@import "spoticons";
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -35,6 +36,14 @@ button:focus {
 }
 
 .player-wrapper {
-  width: 100vw;
-  height: 56.25vh;
+  width: 100%;
+  //height: 56.25vh;
+}
+
+Container .container {
+  width: 100%;
+}
+
+.progress-bar {
+  background-color: inherit;
 }

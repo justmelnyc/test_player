@@ -1,4 +1,4 @@
 import React from 'react';
 
-const Container = ({ children }) => <div className="container">{children}</div>;
+const Container = ({ children }) => <div className="container" style={{width: '100vw'}}>{children}</div>;
 export default Container;
