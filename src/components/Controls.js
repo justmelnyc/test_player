@@ -2,7 +2,7 @@ import React from 'react'
 import Duration from './Durantion'
 
 
-function Controls({playing, played, duration, volume, muted, remaining, toggleMuted, toggleRemaining, playPause}) {
+function Controls({playing, played, duration, volume, muted, loop, remaining, toggleMuted, toggleRemaining, playPause, toggleLoop}) {
 
 
     return (
@@ -52,8 +52,10 @@ function Controls({playing, played, duration, volume, muted, remaining, toggleMu
                                     title={playing ? 'Pause' : 'Play'}/>
 
 
-                                <button className="control-button spoticon-skip-forward-16 interactive" title="Next"/>
-                                <button className="control-button spoticon-repeat-16 interactive"
+                                <button className={'control-button spoticon-skip-forward-16 interactive' } title="Next"/>
+                                <button
+                                    onClick={toggleLoop}
+                                    className={'control-button spoticon-repeat-16 interactive ' + (loop ? 'control-button--active control-button--active-dot' : '')}
                                         title="Enable repeat"/>
                             </div>
                             <div className="playback-bar">

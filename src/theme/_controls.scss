@@ -328,7 +328,7 @@ a {
 }
 
 [class*=" spoticon-"]:before, [class^=spoticon-]:before {
-  font-family: glue1-spoticon;
+  font-family: glue1-spoticon, sans-serif;
   font-style: normal;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
@@ -362,6 +362,20 @@ a {
 .spoticon-repeat-16:before {
   content: "\f13e";
   font-size: 16px;
+}
+
+.control-button--active-dot:after {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  display: block;
+  width: 4px;
+  height: 4px;
+  content: "";
+  border-radius: 50%;
+  background-color: #1db954;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
 }
 
 .spoticon-volume-16:before {
