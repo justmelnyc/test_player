@@ -28,7 +28,8 @@ button:focus {
 }
 
 .interactive {
-  cursor: pointer
+  cursor: pointer;
+  user-select: none;
 }
 
 .desktop {

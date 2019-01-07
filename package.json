@@ -3,22 +3,28 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.18.0",
+    "concurrently": "^4.1.0",
+    "connected-react-router": "^6.1.0",
     "node-sass": "^4.11.0",
     "react": "^16.7.0",
     "react-bootstrap": "^0.32.4",
     "react-dom": "^16.7.0",
     "react-player": "^1.8.0",
+    "react-redux": "5.1.1",
+    "react-router": "4.3.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.2",
+    "redux": "4.0.1",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "2.3.0",
     "screenfull": "^4.0.0"
   },
   "scripts": {
-    "build:css": "postcss src/styles/main.css -o src/index.css",
-    "watch:css": "postcss src/styles/main.css -o src/index.css -w",
-    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start": "concurrently \"react-scripts start\" \"json-server --watch data.json --port 4200\""
   },
   "eslintConfig": {
     "extends": "react-app"

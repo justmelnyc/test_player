@@ -6,12 +6,12 @@ const Header = ({user}) => {
     if (user)
 
         return (
-            <div className="header">
-                <div className="header__BackButton"/>
-                <div className="header__Profile">
-                    <div className="header__Profile">
+            <div className='header'>
+                <div className='header__BackButton'/>
+                <div className='header__Profile'>
+                    <div className='header__Profile '>
                         <img alt={'profile'} src={profile}/>
-                        <p>Bome Theater</p>
+                        <h2 className='interactive'>Bome Theater</h2>
                     </div>
                 </div>
             </div>

@@ -147,7 +147,7 @@ a {
 }
 
 .Root__now-playing-bar {
-  background-color: #181818;
+  background-color:  #323639;//#181818;
   position: fixed;
   width: 100%;
   bottom: 0;
@@ -264,8 +264,8 @@ a {
 
 .now-playing-bar-container {
   min-width: 620px;
-  background-color: #282828;
-  border-top: 1px solid #000;
+  //background-color: #282828;
+  //border-top: 1px solid #000;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

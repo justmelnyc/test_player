@@ -17,11 +17,11 @@ const Sidebar = ({location, songDetails, children}) => (
             {children}
             <p className="NavBar__title">Your library </p>
 
-            <NavItem componentClass={Link} href="/RecentSongs" to="/RecentSongs">
-                Recently played
+            <NavItem componentClass={Link} href='/' to="/">
+                Browse
             </NavItem>
-            <NavItem componentClass={Link} href="/AlbumsPage" to="/AlbumsPage">
-                Albums
+            <NavItem componentClass={Link} href="/settings" to="/settings">
+                Settings
             </NavItem>
             <NavItem componentClass={Link} href="/SongsPage" to="/SongsPage">
                 Songs
