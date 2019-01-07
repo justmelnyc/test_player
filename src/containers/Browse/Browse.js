@@ -1,39 +1,46 @@
 import React, {Component} from 'react'
-import axios from 'axios'
+import {bindActionCreators} from 'redux'
+import {connect} from 'react-redux'
+
 
 import Container from '../../components/Container'
 import TitleSubtitle from '../../components/TitleSubtitle'
 import DisplayList from '../../components/DisplayList'
+import {getMedia} from '../../modules/media'
+import {play} from '../../modules/player'
 
 
 class Browse extends Component {
-
-    state = {
-        albums: []
-    }
-
     componentDidMount() {
-        axios.get(`http://localhost:4200/albums`)
-            .then(res => {
-                const albums = res.data.list.items
-                this.setState({albums})
-            })
-            .catch(err => console.log(err))
+        this.props.getMedia()
     }
-
 
     render() {
-
-        const {albums} = this.state
+        const {items} = this.props.media.list
         return (
             <Container>
                 <TitleSubtitle title="Home"/>
-                <DisplayList data={albums}/>
-
-                {/*<SongList data={this.props.songs.items} onItemClick={this.props.play} />*/}
+                <DisplayList data={items} play={this.props.play}/>
             </Container>
         )
     }
 }
 
-export default Browse
+const mapStateToProps = state => {
+    return {media: state.media}
+}
+
+const mapDispatchToProps = dispatch => {
+    return bindActionCreators(
+        {
+            play,
+            getMedia
+        },
+        dispatch
+    )
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Browse)

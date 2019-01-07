@@ -1,4 +1,6 @@
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
+
 import {findDOMNode} from 'react-dom'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 
@@ -9,6 +11,7 @@ import {Col, Grid, Row} from 'react-bootstrap'
 import screenfull from 'screenfull'
 
 import '../../theme/main.scss'
+
 import Browse from '../Browse/Browse'
 
 import Settings from '../Settings/Settings'
@@ -120,8 +123,7 @@ class App extends Component {
 
     render() {
         const {url, playing, volume, muted, loop, played, loaded, duration, playbackRate, pip, remaining} = this.state
-        // const SEPARATOR = ' · '
-
+        const {source} = this.props
         return (
             <Router>
                 <Grid fluid style={{padding: 0}}>
@@ -134,7 +136,7 @@ class App extends Component {
                                         className='react-player'
                                         width='100%'
                                         height='100%'
-                                        url={url}
+                                        url={source}
                                         pip={pip}
                                         playing={playing}
                                         loop={loop}
@@ -154,8 +156,7 @@ class App extends Component {
                                         onProgress={this.onProgress}
                                         onDuration={this.onDuration}
                                     />
-                                    {this.renderLoadButton('http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4', 'Bunny Video')}
-                                    {this.renderLoadButton('https://www.youtube.com/watch?v=CYThr8Dot-o', 'Nike Mercurial')}
+
 
                                 </PlayerWrapper>
                             </Sidebar>
@@ -188,7 +189,6 @@ class App extends Component {
                                 toggleRemaining={this.toggleRemaining}
                                 toggleMuted={this.toggleMuted}
                                 toggleLoop={this.toggleLoop}
-
                                 onMouseDown={this.onSeekMouseDown}
                                 onChange={this.onSeekChange}
                                 onMouseUp={this.onSeekMouseUp}
@@ -203,4 +203,10 @@ class App extends Component {
     }
 }
 
-export default App
+const mapStateToProps = state => {
+    return {source: state.player.currentSrc}
+}
+
+export default connect(
+    mapStateToProps
+)(App)

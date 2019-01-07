@@ -226,7 +226,7 @@
               "images": [
                 {
                   "height": 640,
-                  "url": "https://i.scdn.co/image/b135562a3a60c80c56a284a4cb0d95e6b2eaf3ef",
+                  "url": "https://mosaic.scdn.co/640/8281023ebbe667ec49fb57b9141649afb884feaa0b422cafc0c70af1254750c3a69684f356a83e96b54c7ebcf92aaf717d5694a3b58babbcaa65f16edda0350b259db5c7c009a70f732a9402ec6c5278",
                   "width": 640
                 },
                 {
@@ -4155,8 +4155,10 @@
     "list": {
       "href": "https://api.spotify.com/v1/me/albums?offset=0&limit=20",
       "items": [
+
         {
           "added_at": "2018-09-10T05:14:31Z",
+          "source" : "https://www.youtube.com/watch?v=CYThr8Dot-o",
           "album": {
             "album_type": "album",
             "artists": [
@@ -4169,17 +4171,6 @@
                 "name": "Diablo Swing Orchestra",
                 "type": "artist",
                 "uri": "spotify:artist:2cbWJP4X5b9sKEDW80uc5r"
-              }
-            ],
-
-            "copyrights": [
-              {
-                "text": "© 2006 Tanglade Ltd t/a Candlelight Records",
-                "type": "C"
-              },
-              {
-                "text": "℗ 2006 Tanglade Ltd t/a Candlelight Records",
-                "type": "P"
               }
             ],
             "external_ids": {
