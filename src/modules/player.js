@@ -1,49 +1,57 @@
-import media from '../apis/media'
-import {fetchMediaError, fetchMediaSuccess, MEDIA_FETCH_REQUEST, MEDIA_FETCH_SUCCESS} from './media'
-
-export const OPERATE = 'video-react/OPERATE';
-export const FULLSCREEN_CHANGE = 'video-react/FULLSCREEN_CHANGE';
-export const PLAYER_ACTIVATE = 'video-react/PLAYER_ACTIVATE';
-export const USER_ACTIVATE = 'video-react/USER_ACTIVATE';
-export const LOAD_START = 'video-react/LOAD_START';
-export const CAN_PLAY = 'video-react/CAN_PLAY';
-export const WAITING = 'video-react/WAITING';
-export const CAN_PLAY_THROUGH = 'video-react/CAN_PLAY_THROUGH';
-export const PLAYING = 'video-react/PLAYING';
-export const PLAY = 'video-react/PLAY';
-export const PAUSE = 'video-react/PAUSE';
-export const END = 'video-react/END';
-export const SEEKING = 'video-react/SEEKING';
-export const SEEKED = 'video-react/SEEKED';
-export const SEEKING_TIME = 'video-react/SEEKING_TIME';
-export const END_SEEKING = 'video-react/END_SEEKING';
-export const DURATION_CHANGE = 'video-react/DURATION_CHANGE';
-export const TIME_UPDATE = 'video-react/TIME_UPDATE';
-export const VOLUME_CHANGE = 'video-react/VOLUME_CHANGE';
-export const PROGRESS_CHANGE = 'video-react/PROGRESS_CHANGE';
-export const RATE_CHANGE = 'video-react/RATE_CHANGE';
-export const SUSPEND = 'video-react/SUSPEND';
-export const ABORT = 'video-react/ABORT';
-export const EMPTIED = 'video-react/EMPTIED';
-export const STALLED = 'video-react/STALLED';
-export const LOADED_META_DATA = 'video-react/LOADED_META_DATA';
-export const LOADED_DATA = 'video-react/LOADED_DATA';
-export const RESIZE = 'video-react/RESIZE';
-export const ERROR = 'video-react/ERROR';
+export const OPERATE = 'player/OPERATE'
+export const FULLSCREEN_CHANGE = 'player/FULLSCREEN_CHANGE'
+export const PLAYER_ACTIVATE = 'player/PLAYER_ACTIVATE'
+export const USER_ACTIVATE = 'player/USER_ACTIVATE'
+export const LOAD_START = 'player/LOAD_START'
+export const CAN_PLAY = 'player/CAN_PLAY'
+export const WAITING = 'player/WAITING'
+export const CAN_PLAY_THROUGH = 'player/CAN_PLAY_THROUGH'
+export const PLAYING = 'player/PLAYING'
+export const PLAY = 'player/PLAY'
+export const PAUSE = 'player/PAUSE'
+export const END = 'player/END'
+export const MUTE = 'player/MUTE'
+export const UNMUTE = 'player/UNMUTE'
+export const LOOP = 'player/LOOP'
+export const UNLOOP = 'player/UNLOOP'
+export const SHUFFLE = 'player/SHUFFLE'
+export const UNSHUFFLE = 'player/UNSHUFFLE'
+export const SEEKING = 'player/SEEKING'
+export const SEEKED = 'player/SEEKED'
+export const SEEKING_TIME = 'player/SEEKING_TIME'
+export const END_SEEKING = 'player/END_SEEKING'
+export const DURATION_CHANGE = 'player/DURATION_CHANGE'
+export const TIME_UPDATE = 'player/TIME_UPDATE'
+export const VOLUME_CHANGE = 'player/VOLUME_CHANGE'
+export const PROGRESS_CHANGE = 'player/PROGRESS_CHANGE'
+export const RATE_CHANGE = 'player/RATE_CHANGE'
+export const SHOW_REMAINDER = 'player/SHOW_REMAINDER'
+export const SHOW_DURATION = 'player/SHOW_DURATION'
+export const SUSPEND = 'player/SUSPEND'
+export const ABORT = 'player/ABORT'
+export const EMPTIED = 'player/EMPTIED'
+export const STALLED = 'player/STALLED'
+export const LOADED_META_DATA = 'player/LOADED_META_DATA'
+export const LOADED_DATA = 'player/LOADED_DATA'
+export const RESIZE = 'player/RESIZE'
+export const ERROR = 'player/ERROR'
 
 const initialState = {
-    currentSrc: null,
+    source: null,
     duration: 0,
     currentTime: 0,
     seekingTime: 0,
     buffered: null,
     waiting: false,
     seeking: false,
+    playing: false,
+    loop: false,
+    shuffling: false,
     paused: true,
     autoPaused: false,
     ended: false,
     playbackRate: 1,
-    muted: false,
+    muted: true,
     volume: 1,
     readyState: 0,
     networkState: 0,
@@ -53,6 +61,7 @@ const initialState = {
     userActivity: true,
     isActive: false,
     isFullscreen: false,
+    remaining: true
 }
 
 export default (state = initialState, action) => {
@@ -112,7 +121,8 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 ...action.videoProps,
-                currentSrc: action.source,
+                source: action.source,
+                playing: true,
                 ended: false,
                 paused: false,
                 autoPaused: false,
@@ -123,7 +133,9 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 ...action.videoProps,
-                paused: true
+                paused: true,
+                playing: false,
+
             }
         case END:
             return {
@@ -142,6 +154,46 @@ export default (state = initialState, action) => {
                 ...state,
                 ...action.videoProps,
                 seeking: false
+            }
+        case MUTE:
+            return {
+                ...state,
+                muted: true
+            }
+        case UNMUTE:
+            return {
+                ...state,
+                muted: false
+            }
+        case LOOP:
+            return {
+                ...state,
+                looped: true
+            }
+        case UNLOOP:
+            return {
+                ...state,
+                looped: false
+            }
+        case SHUFFLE:
+            return {
+                ...state,
+                shuffling: true
+            }
+        case UNSHUFFLE:
+            return {
+                ...state,
+                shuffling: false
+            }
+        case SHOW_DURATION:
+            return {
+                ...state,
+                remaining: false
+            }
+        case SHOW_REMAINDER:
+            return {
+                ...state,
+                remaining: true
             }
         case ERROR:
             return {
@@ -176,9 +228,98 @@ export default (state = initialState, action) => {
     }
 }
 
+export const playToggle = () => {
+    return (dispatch, getState) => {
+        const {playing, source} = getState().player
+        console.log(playing, source)
+        playing ? dispatch(pause()) : dispatch(play(source))
+    }
+}
+
 export const play = (source) => {
     return {
         type: PLAY,
         source
+    }
+}
+
+export const pause = () => {
+    return {
+        type: PAUSE
+    }
+}
+
+
+export const muteToggle = () => {
+    return (dispatch, getState) => {
+        const {muted} = getState().player
+        muted ? dispatch(unmute()) : dispatch(mute())
+    }
+}
+export const mute = () => {
+    return {
+        type: MUTE
+    }
+}
+
+export const unmute = () => {
+    return {
+        type: UNMUTE
+    }
+}
+
+
+export const loopToggle = () => {
+    return (dispatch, getState) => {
+        const {looped} = getState().player
+        looped ? dispatch(unloop()) : dispatch(loop())
+    }
+}
+export const loop = () => {
+    return {
+        type: LOOP
+    }
+}
+
+export const unloop = () => {
+    return {
+        type: UNLOOP
+    }
+}
+
+
+export const toggleRemaining = () => {
+    return (dispatch, getState) => {
+        const {remaining} = getState().player
+        remaining ? dispatch(duration()) : dispatch(remainder())
+    }
+}
+export const duration = () => {
+    return {
+        type: SHOW_DURATION
+    }
+}
+
+export const remainder = () => {
+    return {
+        type: SHOW_REMAINDER
+    }
+}
+
+export const toggleShuffle = () => {
+    return (dispatch, getState) => {
+        const {shuffling} = getState().player
+        shuffling ? dispatch(unshuffle()) : dispatch(shuffle())
+    }
+}
+export const shuffle = () => {
+    return {
+        type: SHUFFLE
+    }
+}
+
+export const unshuffle = () => {
+    return {
+        type: UNSHUFFLE
     }
 }

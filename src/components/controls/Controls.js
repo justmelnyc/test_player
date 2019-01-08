@@ -3,9 +3,7 @@ import Duration from '../utilities/Durantion'
 import profile from '../../media/profile.png'
 
 
-
-function Controls({playing, played, duration, volume, muted, loop, remaining, toggleMuted, toggleRemaining, playPause, toggleLoop}) {
-
+function Controls({playing, played, duration, volume, muted, loop, remaining, toggleMuted, toggleRemaining, playPause, toggleLoop, shuffling, toggleShuffle}) {
 
     return (
         <div className="Root__now-playing-bar">
@@ -43,8 +41,12 @@ function Controls({playing, played, duration, volume, muted, loop, remaining, to
                     <div className="now-playing-bar__center">
                         <div className="player-controls" dir="ltr">
                             <div className="player-controls__buttons">
-                                <button className="control-button spoticon-shuffle-16 interactive"
-                                        title="Enable shuffle"/>
+                                <button
+                                    onClick={toggleShuffle}
+                                    className={'control-button spoticon-shuffle-16 interactive ' + (shuffling ? 'control-button--active control-button--active-dot' : '')}
+                                    title="Enable shuffle"/>
+
+
                                 <button className="control-button spoticon-skip-back-16 interactive" title="Previous"/>
 
 
@@ -54,11 +56,11 @@ function Controls({playing, played, duration, volume, muted, loop, remaining, to
                                     title={playing ? 'Pause' : 'Play'}/>
 
 
-                                <button className={'control-button spoticon-skip-forward-16 interactive' } title="Next"/>
+                                <button className={'control-button spoticon-skip-forward-16 interactive'} title="Next"/>
                                 <button
                                     onClick={toggleLoop}
                                     className={'control-button spoticon-repeat-16 interactive ' + (loop ? 'control-button--active control-button--active-dot' : '')}
-                                        title="Enable repeat"/>
+                                    title="Enable repeat"/>
                             </div>
                             <div className="playback-bar">
                                 <div className="playback-bar__progress-time">
@@ -108,7 +110,6 @@ function Controls({playing, played, duration, volume, muted, loop, remaining, to
                                         onClick={toggleMuted}
                                         className={'control-button interactive ' + (muted ? 'spoticon-fullscreen-16' : 'spoticon-minimise-16')}
                                     />
-
 
 
                                 </div>

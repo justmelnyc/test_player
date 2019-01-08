@@ -19,12 +19,14 @@ import Controls from '../../components/controls/Controls'
 import Sidebar from '../../components/Sidebar'
 import Header from '../../components/Header'
 import PlayerWrapper from '../../components/PlayerWrapper'
+import {bindActionCreators} from 'redux'
+import {muteToggle, playToggle, loopToggle, toggleRemaining, toggleShuffle} from '../../modules/player'
 
 class App extends Component {
     state = {
         url: null,
-        pip: false,
-        playing: true,
+        pip: true,
+        playing: false,
         volume: 0.8,
         muted: true,
         played: 0,
@@ -122,8 +124,8 @@ class App extends Component {
     }
 
     render() {
-        const {url, playing, volume, muted, loop, played, loaded, duration, playbackRate, pip, remaining} = this.state
-        const {source} = this.props
+        const {volume, played, duration, playbackRate, pip } = this.state
+        const {source, playing, muted, playToggle, muteToggle, looped, loopToggle, remaining, toggleRemaining, shuffling, toggleShuffle} = this.props
         return (
             <Router>
                 <Grid fluid style={{padding: 0}}>
@@ -139,7 +141,7 @@ class App extends Component {
                                         url={source}
                                         pip={pip}
                                         playing={playing}
-                                        loop={loop}
+                                        loop={looped}
                                         playbackRate={playbackRate}
                                         volume={volume}
                                         muted={muted}
@@ -182,13 +184,15 @@ class App extends Component {
                                 played={played}
                                 volume={volume}
                                 muted={muted}
-                                loop={loop}
+                                shuffling={shuffling}
+                                toggleShuffle={toggleShuffle}
+                                loop={looped}
                                 playing={playing}
                                 remaining={remaining}
-                                playPause={this.playPause}
-                                toggleRemaining={this.toggleRemaining}
-                                toggleMuted={this.toggleMuted}
-                                toggleLoop={this.toggleLoop}
+                                playPause={playToggle}
+                                toggleRemaining={toggleRemaining}
+                                toggleMuted={muteToggle}
+                                toggleLoop={loopToggle}
                                 onMouseDown={this.onSeekMouseDown}
                                 onChange={this.onSeekChange}
                                 onMouseUp={this.onSeekMouseUp}
@@ -204,9 +208,25 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-    return {source: state.player.currentSrc}
+    const {source, playing, muted, looped, remaining, shuffling} = state.player
+    return {source, playing, muted, looped, remaining, shuffling}
+}
+
+const mapDispatchToProps = dispatch => {
+    return bindActionCreators(
+        {
+            playToggle,
+            muteToggle,
+            loopToggle,
+            toggleRemaining,
+            toggleShuffle
+
+        },
+        dispatch
+    )
 }
 
 export default connect(
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(App)

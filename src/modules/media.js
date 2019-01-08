@@ -1,4 +1,3 @@
-import axios from 'axios'
 import media from '../apis/media'
 
 export const MEDIA_FETCH_REQUEST = 'media/FETCH_REQUEST'

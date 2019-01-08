@@ -2,8 +2,10 @@
   <dictionary name="mpacheco">
     <words>
       <w>displaylist</w>
+      <w>playlists</w>
       <w>screenfull</w>
       <w>spoticon</w>
+      <w>unloop</w>
     </words>
   </dictionary>
 </component>
