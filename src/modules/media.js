@@ -21,10 +21,10 @@ export default (state = initialState, action) => {
                 ...state,
                 isFetching: false,
                 hasFetched: true,
-                list: action.albums
+                list: action.resource
             }
         case MEDIA_FETCH_ERROR:
-            return {...state, isFetching: false, error: action.albums.list}
+            return {...state, isFetching: false, error: action.resource.list}
         default:
             return state
     }
@@ -37,10 +37,10 @@ export function fetchMedia() {
     }
 }
 
-export function fetchMediaSuccess(albums) {
+export function fetchMediaSuccess(resource) {
     return {
         type: MEDIA_FETCH_SUCCESS,
-        albums
+        resource
     }
 }
 
@@ -52,11 +52,11 @@ export function fetchMediaError(err) {
 }
 
 
-export const getMedia = () => async dispatch => {
-    const response = await media.get('/albums')
-    const {list} = response.data
+export const getMedia = (resource) => async dispatch => {
+    const response = await media.get(`/${resource}`)
+    const {data} = response
     try {
-        dispatch(fetchMediaSuccess(list))
+        dispatch(fetchMediaSuccess(data))
     } catch (err) {
         dispatch(fetchMediaError(err))
     }

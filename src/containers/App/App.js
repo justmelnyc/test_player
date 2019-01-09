@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
 import {findDOMNode} from 'react-dom'
-import {BrowserRouter as Router, Route} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 
 import ReactPlayer from 'react-player'
 
@@ -11,60 +11,52 @@ import {Col, Grid, Row} from 'react-bootstrap'
 import screenfull from 'screenfull'
 
 import '../../theme/main.scss'
-
-import Browse from '../Browse/Browse'
-
 import Settings from '../Settings/Settings'
+import Browse from '../Browse/Browse'
+import Home from '../Home/Home'
+
 import Controls from '../../components/controls/Controls'
 import Sidebar from '../../components/Sidebar'
 import Header from '../../components/Header'
 import PlayerWrapper from '../../components/PlayerWrapper'
 import {bindActionCreators} from 'redux'
-import {muteToggle, playToggle, loopToggle, toggleRemaining, toggleShuffle} from '../../modules/player'
+import {loopToggle, muteToggle, playToggle, togglePIP, toggleRemaining, toggleShuffle} from '../../modules/player'
+import {getMedia} from '../../modules/media'
+
+
 
 class App extends Component {
-    state = {
-        url: null,
-        pip: true,
-        playing: false,
-        volume: 0.8,
-        muted: true,
-        played: 0,
-        loaded: 0,
-        duration: 0,
-        playbackRate: 1.0,
-        loop: false,
-        remaining: false
+    componentDidMount() {
+        this.props.getMedia('media')
     }
-    load = url => {
-        this.setState({
-            url,
-            played: 0,
-            loaded: 0,
-            pip: false
-        })
-    }
-    playPause = () => {
-        this.setState({playing: !this.state.playing})
-    }
-    pip = () => {
-        this.setState({pip: !this.state.pip})
-    }
-    stop = () => {
-        this.setState({url: null, playing: false})
-    }
-    toggleLoop = () => {
-        this.setState({loop: !this.state.loop})
-    }
-    setVolume = e => {
-        this.setState({volume: parseFloat(e.target.value)})
-    }
-    toggleMuted = () => {
-        this.setState({muted: !this.state.muted})
-    }
-    toggleRemaining = () => {
-        this.setState({remaining: !this.state.remaining})
-    }
+
+    // load = url => {
+    //     this.setState({
+    //         url,
+    //         played: 0,
+    //         loaded: 0,
+    //         pip: false
+    //     })
+    // }
+    // playPause = () => {
+    //     this.setState({playing: !this.state.playing})
+    // }
+    // pip = () => {
+    //     this.setState({pip: !this.state.pip})
+    // }
+
+    // toggleLoop = () => {
+    //     this.setState({loop: !this.state.loop})
+    // }
+    // setVolume = e => {
+    //     this.setState({volume: parseFloat(e.target.value)})
+    // }
+    // toggleMuted = () => {
+    //     this.setState({muted: !this.state.muted})
+    // }
+    // toggleRemaining = () => {
+    //     this.setState({remaining: !this.state.remaining})
+    // }
     setPlaybackRate = e => {
         this.setState({playbackRate: parseFloat(e.target.value)})
     }
@@ -72,14 +64,17 @@ class App extends Component {
         console.log('onPlay')
         this.setState({playing: true})
     }
-    onEnablePIP = () => {
-        console.log('onEnablePIP')
-        this.setState({pip: true})
+    stop = () => {
+        this.setState({url: null, playing: false})
     }
-    onDisablePIP = () => {
-        console.log('onDisablePIP')
-        this.setState({pip: false})
-    }
+    // onEnablePIP = () => {
+    //     console.log('onEnablePIP')
+    //     this.setState({pip: true})
+    // }
+    // onDisablePIP = () => {
+    //     console.log('onDisablePIP')
+    //     this.setState({pip: false})
+    // }
     onPause = () => {
         console.log('onPause')
         this.setState({playing: false})
@@ -112,20 +107,19 @@ class App extends Component {
     onClickFullscreen = () => {
         screenfull.request(findDOMNode(this.player))
     }
-    renderLoadButton = (url, label) => {
-        return (
-            <button onClick={() => this.load(url)}>
-                {label}
-            </button>
-        )
-    }
+    // renderLoadButton = (url, label) => {
+    //     return (
+    //         <button onClick={() => this.load(url)}>
+    //             {label}
+    //         </button>
+    //     )
+    // }
     ref = player => {
         this.player = player
     }
 
     render() {
-        const {volume, played, duration, playbackRate, pip } = this.state
-        const {source, playing, muted, playToggle, muteToggle, looped, loopToggle, remaining, toggleRemaining, shuffling, toggleShuffle} = this.props
+        const {source, playing, duration, played, playbackRate, pip, volume, muted, playToggle, muteToggle, looped, loopToggle, remaining, toggleRemaining, shuffling, toggleShuffle, togglePIP} = this.props
         return (
             <Router>
                 <Grid fluid style={{padding: 0}}>
@@ -165,15 +159,18 @@ class App extends Component {
                         </Col>
                         <Col xs={9} md={9} className="content">
                             <Header user={'user'}/>
-                            <Route exact path="/" component={Browse}/>
-                            <Route exact path="/settings" component={Settings}/>
+                            <Switch>
+                                <Route exact path="/" component={Home}/>
+                                <Route exact path="/browse" component={Browse}/>
+                                <Route exact path="/settings" component={Settings}/>
 
-                            {/*<Route path="/login" component={Login}/>*/}
-                            {/*<PrivateRoute path="/RecentSongs" component={HomePage} user={user}/>*/}
-                            {/*<Route path="/AlbumsPage" component={AlbumsPage} user={user}/>*/}
+                                {/*<Route path="/login" component={Login}/>*/}
+                                {/*<PrivateRoute path="/RecentSongs" component={HomePage} user={user}/>*/}
+                                {/*<Route path="/AlbumsPage" component={AlbumsPage} user={user}/>*/}
 
-                            {/*<PrivateRoute path="/AboutPage" component={AboutPage} user={user}/>*/}
-                            {/*<Route path="/SongsPage" component={SongsPage} user={user}/>*/}
+                                {/*<PrivateRoute path="/AboutPage" component={AboutPage} user={user}/>*/}
+                                {/*<Route path="/SongsPage" component={SongsPage} user={user}/>*/}
+                            </Switch>
                         </Col>
                     </Row>
 
@@ -192,10 +189,12 @@ class App extends Component {
                                 playPause={playToggle}
                                 toggleRemaining={toggleRemaining}
                                 toggleMuted={muteToggle}
+                                togglePIP={togglePIP}
                                 toggleLoop={loopToggle}
                                 onMouseDown={this.onSeekMouseDown}
                                 onChange={this.onSeekChange}
                                 onMouseUp={this.onSeekMouseUp}
+                                pip={pip}
                             >
                             </Controls>
                         </Col>
@@ -208,18 +207,20 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-    const {source, playing, muted, looped, remaining, shuffling} = state.player
-    return {source, playing, muted, looped, remaining, shuffling}
+    const {source, playing, duration, volume, muted, looped, remaining, shuffling, pip, playbackRate, loaded, played} = state.player
+    return {source, playing, duration, volume, muted, looped, remaining, shuffling, pip, playbackRate, loaded, played}
 }
 
 const mapDispatchToProps = dispatch => {
     return bindActionCreators(
         {
+            getMedia,
             playToggle,
             muteToggle,
             loopToggle,
             toggleRemaining,
-            toggleShuffle
+            toggleShuffle,
+            togglePIP
 
         },
         dispatch

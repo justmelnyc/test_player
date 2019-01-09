@@ -7,7 +7,10 @@ const Sidebar = ({location, songDetails, children}) => (
         <div>
             {children}
             <p className="NavBar__title">Your library </p>
-            <NavItem componentClass={Link} href='/' to="/">
+            <NavItem componentClass={Link} href="/" to="/">
+                Home
+            </NavItem>
+            <NavItem componentClass={Link} href='/browse' to="/browse">
                 Browse
             </NavItem>
             <NavItem componentClass={Link} href="/settings" to="/settings">

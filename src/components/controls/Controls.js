@@ -3,7 +3,7 @@ import Duration from '../utilities/Durantion'
 import profile from '../../media/profile.png'
 
 
-function Controls({playing, played, duration, volume, muted, loop, remaining, toggleMuted, toggleRemaining, playPause, toggleLoop, shuffling, toggleShuffle}) {
+function Controls({playing, played, duration, volume, muted, loop, remaining, toggleMuted, toggleRemaining, playPause, toggleLoop, shuffling, toggleShuffle, togglePIP, pip}) {
 
     return (
         <div className="Root__now-playing-bar">
@@ -90,7 +90,8 @@ function Controls({playing, played, duration, volume, muted, loop, remaining, to
                                 <div className="ExtraControls__connect-device-picker"><span
                                     className="connect-device-picker">
                                         <button
-                                            className="spoticon-devices-16 control-button"
+                                            onClick={togglePIP}
+                                            className={'spoticon-devices-16 control-button interactive ' + (pip ? 'control-button--active' : '')}
                                             aria-label="Connect to a device"/></span></div>
                                 <div className="volume-bar" dir="ltr">
                                     <button

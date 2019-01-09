@@ -30,9 +30,69 @@
     "token": "BQADuAPNfdVWmlAuFYDwa33jEqMOo82Ev59AZX046kKcezbGvzbepGw_4JFYw0L7h8tw2mRxDF8ytFXu_pXlvvw4iQV6ZrZSeaPW_6FqmYfdMkYOTCHvjzNtx_sHAjaMQl5DWnfhDdyzl-cslvehm3ChBo4L-YZ8h4n9N9cPDePHw5dH9uW0qEGQFfaGqhk3Bs6p8LAYxZtcIIM14WFExBE8UQxZ2sP8Mb353msTLMPAAiT_waITLfeefOhOVCcGIMwwVK-NN5jvfo2Xp1KJ",
     "error": null
   },
-  "media":  {
+  "media":  [
+    {
+      "title": "Mercurial - Nike",
+      "poster": "https://mir-s3-cdn-cf.behance.net/project_modules/fs/1fed1848086843.588e75c6d2db6.jpg",
+      "source": "https://www.youtube.com/watch?v=CYThr8Dot-o"
+    },
+    {
+      "title": "Create the Answer – adidas",
+      "poster": "https://mir-s3-cdn-cf.behance.net/project_modules/1400/0dec8173469715.5c0a4220c0deb.jpg",
+      "source": "https://www.youtube.com/watch?v=hqaUF2JNY_U"
+    },
+    {
+      "title": "Ape Shit - Beyonce & Jay Z",
+      "poster": "https://media.newyorker.com/photos/5b28664bf92aa133099320bc/16:9/w_1200,h_630,c_limit/Doreen-Louvre.jpg",
+      "source": "https://www.youtube.com/watch?v=kbMqWXnpXcA"
+    },
+    {
+      "title": "Matta - Release The Freq",
+      "poster": "https://i.scdn.co/image/d95e326344acfe66f816541aa315f9c3ed108058",
+      "source": "https://vimeo.com/20800127"
+    },
+    {
+      "title": "Spotify - Dance Rock",
+      "poster": "https://i.scdn.co/image/d95e326344acfe66f816541aa315f9c3ed108058",
+      "source": "https://vimeo.com/299187112"
+    },
+    {
+      "title": "Mercurial - Nike",
+      "poster": "https://mir-s3-cdn-cf.behance.net/project_modules/fs/1fed1848086843.588e75c6d2db6.jpg",
+      "source": "https://www.youtube.com/watch?v=CYThr8Dot-o"
+    },
+    {
+      "title": "Create the Answer – adidas",
+      "poster": "https://mir-s3-cdn-cf.behance.net/project_modules/1400/0dec8173469715.5c0a4220c0deb.jpg",
+      "source": "https://www.youtube.com/watch?v=hqaUF2JNY_U"
+    },
+    {
+      "title": "Quality Time",
+      "poster": "https://mir-s3-cdn-cf.behance.net/project_modules/1400/0acff973469715.5c0a4220c20fd.jpg",
+      "source": "https://vimeo.com/channels/staffpicks/306770995"
+    },
+    {
+      "title": "Matta - Release The Freq",
+      "poster": "https://i.scdn.co/image/d95e326344acfe66f816541aa315f9c3ed108058",
+      "source": "https://vimeo.com/20800127"
+    },
+    {
+      "title": "Spotify - Dance Rock",
+      "poster": "https://i.scdn.co/image/d95e326344acfe66f816541aa315f9c3ed108058",
+      "source": "https://vimeo.com/299187112"
+    },
+    {
+      "title": "Matta - Release The Freq",
+      "poster": "https://i.scdn.co/image/d95e326344acfe66f816541aa315f9c3ed108058",
+      "source": "https://vimeo.com/20800127"
+    },
+    {
+      "title": "Spotify - Dance Rock",
+      "poster": "https://i.scdn.co/image/d95e326344acfe66f816541aa315f9c3ed108058",
+      "source": "https://vimeo.com/299187112"
+    }
 
-  },
+  ],
   "song": {
     "isFetching": false,
     "hasFetchedRecentSongs": false,

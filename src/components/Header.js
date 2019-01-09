@@ -10,7 +10,7 @@ const Header = ({user}) => {
                 <div className='header__BackButton'/>
                 <div className='header__Profile'>
                     <div className='header__Profile '>
-                        <img alt={'profile'} src={profile}/>
+                        <img className='interactive' alt={'profile'} src={profile}/>
                         <h2 className='interactive'>Bome Theater</h2>
                     </div>
                 </div>

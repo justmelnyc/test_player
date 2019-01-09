@@ -11,12 +11,12 @@ import {getMedia} from '../../modules/media'
 import DataList from '../../components/DataList/DataList'
 
 
-const Browse = (props) => {
+const Home = (props) => {
     const {list} = props.media
 
     return (
         <Container>
-            <TitleSubtitle title="Home"/>
+            <TitleSubtitle title="Made For You" subtitle='Your daily Mixes'/>
             <DataList data={list} play={props.play}/>
         </Container>
     )
@@ -40,5 +40,5 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Browse)
+)(Home)
 

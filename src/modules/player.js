@@ -16,6 +16,8 @@ export const LOOP = 'player/LOOP'
 export const UNLOOP = 'player/UNLOOP'
 export const SHUFFLE = 'player/SHUFFLE'
 export const UNSHUFFLE = 'player/UNSHUFFLE'
+export const ENABLEPIP = 'player/ENABLEPIP'
+export const DISABLEPIP = 'player/DISABLEPIP'
 export const SEEKING = 'player/SEEKING'
 export const SEEKED = 'player/SEEKED'
 export const SEEKING_TIME = 'player/SEEKING_TIME'
@@ -50,9 +52,12 @@ const initialState = {
     paused: true,
     autoPaused: false,
     ended: false,
-    playbackRate: 1,
     muted: true,
-    volume: 1,
+    pip: false,
+    volume: 0.8,
+    played: 0,
+    loaded: 0,
+    playbackRate: 1.0,
     readyState: 0,
     networkState: 0,
     videoWidth: 0,
@@ -184,6 +189,16 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 shuffling: false
+            }
+        case ENABLEPIP:
+            return {
+                ...state,
+                pip: true
+            }
+        case DISABLEPIP:
+            return {
+                ...state,
+                pip: false
             }
         case SHOW_DURATION:
             return {
@@ -321,5 +336,25 @@ export const shuffle = () => {
 export const unshuffle = () => {
     return {
         type: UNSHUFFLE
+    }
+}
+
+export const togglePIP = () => {
+    return (dispatch, getState) => {
+        const {pip} = getState().player
+        pip ? dispatch(disablePIP()) : dispatch(enablePIP())
+    }
+}
+
+export const enablePIP = () => {
+    console.log('onEnablePIP')
+    return {
+        type: ENABLEPIP
+    }
+}
+export const disablePIP = () => {
+    console.log('onDisablePIP')
+    return {
+        type: DISABLEPIP
     }
 }
