@@ -1,6 +1,6 @@
-@import "controls";
-@import "spotify";
-@import "spoticons";
+@import "ui";
+@import "controller";
+@import "icons";
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -23,8 +23,46 @@ time, mark, audio, video {
 
 }
 
+.hot {
+  border: 1px dashed #E14306;
+
+}
+.SidePanel {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 320px;
+  background: #121212;
+  overflow-x: hidden;
+  flex: 1;
+}
+.MainPanel {
+  //margin-left: 320px;
+  min-width: 550px;
+  max-width: 1150px;
+  height: 100vh;
+  overflow-y: hidden;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
 button:focus {
   outline: none !important;
+}
+
+.ui.grid {
+  margin: 0;
 }
 
 .interactive {
@@ -38,7 +76,9 @@ button:focus {
 
 .player-wrapper {
   width: 100%;
-  //height: 56.25vh;
+  height: 35vh;
+  background: #000000;
+  flex: 0 0 auto;
 }
 
 Container .container {
@@ -47,6 +87,7 @@ Container .container {
 
 .progress-bar {
   background-color: inherit;
+  box-shadow: none;
 }
 
 .loading {
@@ -99,4 +140,8 @@ Container .container {
   padding-bottom: 5px;
   margin: 40px 0 20px;
   border-bottom: 1px solid #282828;
+}
+
+.danger {
+  border: 1px solid red;
 }

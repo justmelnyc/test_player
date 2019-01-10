@@ -1,5 +1,4 @@
 import React from 'react'
-import profile from '../media/profile.png'
 
 
 const Header = ({user}) => {
@@ -10,7 +9,8 @@ const Header = ({user}) => {
                 <div className='header__BackButton'/>
                 <div className='header__Profile'>
                     <div className='header__Profile '>
-                        <img className='interactive' alt={'profile'} src={profile}/>
+                        <img className='interactive' alt={'profile'}
+                             src='http://commercial-song.net/wp-content/uploads/2018/02/Nike_Mercurial_Commercial.jpg'/>
                         <h2 className='interactive'>Bome Theater</h2>
                     </div>
                 </div>

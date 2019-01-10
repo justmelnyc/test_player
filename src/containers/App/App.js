@@ -22,6 +22,7 @@ import PlayerWrapper from '../../components/PlayerWrapper'
 import {bindActionCreators} from 'redux'
 import {loopToggle, muteToggle, playToggle, togglePIP, toggleRemaining, toggleShuffle} from '../../modules/player'
 import {getMedia} from '../../modules/media'
+import Controller from '../../components/Controller/Controller'
 
 
 
@@ -176,7 +177,7 @@ class App extends Component {
 
                     <Row className="show-grid">
                         <Col xs={12} md={12} style={{height: '80px'}}>
-                            <Controls
+                            <Controller
                                 duration={duration}
                                 played={played}
                                 volume={volume}
@@ -196,7 +197,7 @@ class App extends Component {
                                 onMouseUp={this.onSeekMouseUp}
                                 pip={pip}
                             >
-                            </Controls>
+                            </Controller>
                         </Col>
                     </Row>
                 </Grid>
