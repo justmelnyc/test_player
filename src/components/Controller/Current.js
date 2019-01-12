@@ -34,7 +34,7 @@ const Current = () => {
                 <div className="track-info__name ellipsis-one-line" dir="auto">
                     <div className="react-contextmenu-wrapper">
                         <span draggable="true">
-                            <a href="/album/7AxV7VNigVBpwYZUQ9vpIX">Nike Mercurial</a>
+                            <a className='current_track' href="/album/7AxV7VNigVBpwYZUQ9vpIX">Nike Mercurial</a>
                         </span>
                     </div>
                 </div>

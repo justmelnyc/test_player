@@ -1,6 +1,13 @@
+@import "variables";
+@import "dropdown";
+
 @import "ui";
+@import "utils";
+@import "links";
+@import "card";
 @import "controller";
 @import "icons";
+@import "header";
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -23,10 +30,19 @@ time, mark, audio, video {
 
 }
 
-.hot {
-  border: 1px dashed #E14306;
-
+html, body {
+  height: 100vh;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding-top: 0;
 }
+
+.stretch,
+.container .row .col-md-6 {
+  height: 100vh;
+  overflow: auto;
+}
+
 .SidePanel {
   position: fixed;
   display: flex;
@@ -39,6 +55,7 @@ time, mark, audio, video {
   overflow-x: hidden;
   flex: 1;
 }
+
 .MainPanel {
   //margin-left: 320px;
   min-width: 550px;
@@ -46,6 +63,11 @@ time, mark, audio, video {
   height: 100vh;
   overflow-y: hidden;
 }
+
+.navBar {
+  padding: 0 0 0 16px;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -65,14 +87,6 @@ button:focus {
   margin: 0;
 }
 
-.interactive {
-  cursor: pointer;
-  user-select: none;
-}
-
-.desktop {
-  user-select: none;
-}
 
 .player-wrapper {
   width: 100%;
@@ -81,7 +95,7 @@ button:focus {
   flex: 0 0 auto;
 }
 
-Container .container {
+.container {
   width: 100%;
 }
 
@@ -126,22 +140,11 @@ Container .container {
   }
 }
 
-@keyframes spin {
-  0% {
-    transform: rotate(360deg);
-  }
-
-  100% {
-    transform: rotate(0deg);
-  }
-}
-
-.page-header {
-  padding-bottom: 5px;
-  margin: 40px 0 20px;
-  border-bottom: 1px solid #282828;
-}
 
 .danger {
   border: 1px solid red;
+}
+.page-header {
+  padding: 60px 0 10px;
+  border-bottom: 1px solid #282828;
 }

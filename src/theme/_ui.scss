@@ -5,20 +5,24 @@ body {
   overflow: hidden;
 }
 
+.ui-bg {
+  background: #121212;
+}
+
 /* app.css */
 
 .content {
   height: 100%;
   padding: 0;
   background: #000000;
-  background: linear-gradient(to right bottom, rgb(22, 32, 43), rgb(0, 0, 0)), linear-gradient(transparent, rgb(0, 0, 0) 70%);//linear-gradient(0deg, #181818 87%, #3E3E3E 100%);
+  background: linear-gradient(to right bottom, rgb(22, 32, 43), rgb(0, 0, 0)), linear-gradient(transparent, rgb(0, 0, 0) 70%); //linear-gradient(0deg, #181818 87%, #3E3E3E 100%);
 }
 
 /* container.css */
 
 .container {
   padding: 30px;
-  width: 100%;
+  //width: 100%;
   height: 100%;
   overflow-y: scroll;
 }
@@ -26,14 +30,15 @@ body {
 /* displaylist.css */
 
 .displayList {
-  padding: 0 0 200px;
+  //padding: 0 0 10px;
+  //margin: 0 0 10px;
   display: flex;
   max-width: 100%;
   flex-wrap: wrap;
 }
 
 .displayListItem {
-  color: white;
+  color: #FFFFFF;
   list-style: none;
   margin: 10px;
   min-width: 200px;
@@ -100,7 +105,7 @@ body {
   justify-content: space-between;
   padding: 1% 10%;
   color: white;
-  background-color: transparent;
+  //background-color: transparent;
   /*box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);*/
   h1 {
     font-size: 1em;
@@ -218,12 +223,12 @@ body {
 
 .title {
   color: white;
-  font-weight: 600;
-  font-size: 2.5em;
+  font-weight: 700;
+  font-size: 3em;
 }
 
 .subtitle {
   color: white;
   font-weight: bold;
-  margin-top: 70px;
+  margin-top: 50px;
 }

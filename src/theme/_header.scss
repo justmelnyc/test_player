@@ -1,0 +1,36 @@
+
+.header {
+  display: block;
+  padding: 7px 15px;
+
+  .form-control {
+    display: block;
+    width: 100%;
+    height: calc(1.5rem + 2px);
+    padding: .35rem .75rem;
+    font-size: .8rem;
+    line-height: .1;
+    color: #000000;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: none;
+    border-radius: 1.5rem;
+    &:focus {
+      outline: none;
+    }
+  }
+
+  ::placeholder {
+    color: #000000;
+  }
+
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: #FFFFFF;
+
+  &:hover, &:active {
+    color: #909090;
+  }
+}
+

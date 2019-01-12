@@ -6,10 +6,13 @@ const Spinner = () => {
 
     return (
         <div className="loading">
-            <div className="loader"></div>
+            <div className="loader"/>
         </div>
     )
 
 }
 
 export default Spinner
+
+
+

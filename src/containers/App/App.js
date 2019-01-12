@@ -17,7 +17,7 @@ import Home from '../Home/Home'
 
 import Controls from '../../components/controls/Controls'
 import Sidebar from '../../components/Sidebar'
-import Header from '../../components/Header'
+import Header from '../../components/Header/Header'
 import PlayerWrapper from '../../components/PlayerWrapper'
 import {bindActionCreators} from 'redux'
 import {loopToggle, muteToggle, playToggle, togglePIP, toggleRemaining, toggleShuffle} from '../../modules/player'
@@ -125,7 +125,7 @@ class App extends Component {
             <Router>
                 <Grid fluid style={{padding: 0}}>
                     <Row className="show-grid" style={{height: '100vh'}}>
-                        <Col xs={3} md={3} style={{height: '100%', padding: 0}}>
+                        <Col xs={4} md={4} style={{height: '100%', padding: 0}}>
                             <Sidebar>
                                 <PlayerWrapper>
                                     <ReactPlayer
@@ -158,7 +158,7 @@ class App extends Component {
                                 </PlayerWrapper>
                             </Sidebar>
                         </Col>
-                        <Col xs={9} md={9} className="content">
+                        <Col xs={8} md={8} className="content">
                             <Header user={'user'}/>
                             <Switch>
                                 <Route exact path="/" component={Home}/>
